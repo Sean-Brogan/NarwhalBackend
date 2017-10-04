@@ -1,6 +1,8 @@
 package main.java.Controllers;
 
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -60,12 +62,14 @@ public class UserController {
 	}
 	
 	@GetMapping("login")
-	public ResponseEntity<User> loginVerify(@RequestBody String username, String password) {
+	public ResponseEntity<User> loginVerify(@RequestParam Map<String, String> requestParams) {
+		String username = requestParams.get("username");
+		String password = requestParams.get("password");
 		boolean flag = userService.verifyLogin(username, password);
 		if (flag == false) {
 		     return new ResponseEntity<User>(HttpStatus.UNAUTHORIZED);
 		}
 		User user = userService.getUserWithLogin(username, password);
-		return new ResponseEntity<User>(user, HttpStatus.FOUND);
+		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
 } 

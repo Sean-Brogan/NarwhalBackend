@@ -16,7 +16,7 @@ public class User implements Serializable{
 	@Column(name="userid")
 	private int userId;
 	@Column(name="username")
-	private String userName;
+	private String username;
 	@Column(name="password")
 	private String password;
 	@Column(name="firstname")
@@ -24,10 +24,10 @@ public class User implements Serializable{
 	@Column(name="lastname")
 	private String lastName;
 	
-	public User(int userId, String userName, String password, String firstName, String lastName){
+	public User(int userId, String username, String password, String firstName, String lastName){
 		super();
 		this.setUserId(userId);
-		this.setUserName(userName);
+		this.setusername(username);
 		this.setPassword(password);
 		this.setFirstName(firstName);
 		this.setLastName(lastName);
@@ -45,12 +45,12 @@ public class User implements Serializable{
 		this.userId = userId;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getusername() {
+		return username;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setusername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {

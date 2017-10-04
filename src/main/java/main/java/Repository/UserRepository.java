@@ -46,7 +46,7 @@ public class UserRepository implements IUserRepository{
 	
 	@Override
 	public boolean loginExists(String username, String password) {
-		String hql = "FROM Users WHERE username = ? and password = ?";
+		String hql = "FROM User as user WHERE user.username = ? and user.password = ?";
 		int count = entityManager.createQuery(hql).setParameter(1, username)
 		              .setParameter(2, password).getResultList().size();
 		return count > 0 ? true : false;
@@ -54,7 +54,7 @@ public class UserRepository implements IUserRepository{
 	
 	@Override
 	public User getUserWithLogin(String username, String password){
-		String hql = "FROM Users as user WHERE user.username = ? and user.password = ?";
+		String hql = "FROM User as user WHERE user.username = ? and user.password = ?";
 		User user = (User) entityManager.createQuery(hql).setParameter(1, username)
 						.setParameter(2, password).getResultList().get(0);
 		return user;
