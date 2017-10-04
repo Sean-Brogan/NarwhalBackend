@@ -1,27 +1,48 @@
 package main.java.Classes;
+
 import java.util.Date;
 
-public class medicalRecord 
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="medicalrecords")
+public class MedicalRecord implements Serializable
 {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="recordid")
 	private int recordId;
+	@JoinColumn(name="userid")
 	private int patientId;
+	@JoinColumn(name="userid")	
 	private int doctorId;
+	@Column(name="treatment")
 	private String treatment;
+	@Column(name="description")
 	private String description;
+	@Column(name="recordDate")
 	private Date recordDate;
 	
-	public medicalRecord(int recordId, int patientId, int doctorId, String treatment, String description, Date recordDate)
+	public MedicalRecord(int recordId, int patientId, int doctorId, String treatment, String description, Date recordDate)
 	{
 		super();
-		this.recordId = recordId;
-		this.patientId = patientId;
-		this.doctorId = doctorId;
-		this.treatment = treatment;
-		this.description = description;
-		this.recordDate = recordDate;
+		this.setRecordId(recordId);
+		this.setPatientId(patientId);
+		this.setDoctorId(doctorId);
+		this.setTreatment(treatment);
+		this.setDescription(description);
+		this.setRecordDate(recordDate);
 	}
 	
-	public medicalRecord(){
+	public MedicalRecord(){
 		super();
 	}
 	

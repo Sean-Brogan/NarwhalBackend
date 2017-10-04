@@ -24,12 +24,12 @@ public class UserService implements IUserService {
 		
 	@Override
 	public synchronized boolean createUser(User user){
-               if (userRepository.loginExists(user.getUserName(), user.getPassword())) {
-    	           return false;
-               } else {
-            	   userRepository.createUser(user);
-    	           return true;
-               }
+		if (userRepository.loginExists(user.getUsername(), user.getPassword())) {
+			return false;
+		} else {
+			userRepository.createUser(user);
+			return true;
+		}
 	}
 	
 	@Override

@@ -10,7 +10,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="users")
-public class User implements Serializable{
+public class User implements Serializable
+{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="userid")
@@ -20,17 +21,17 @@ public class User implements Serializable{
 	@Column(name="password")
 	private String password;
 	@Column(name="firstname")
-	private String firstName;
+	private String firstname;
 	@Column(name="lastname")
-	private String lastName;
+	private String lastname;
 	
-	public User(int userId, String username, String password, String firstName, String lastName){
+	public User(int userId, String username, String password, String firstname, String lastname){
 		super();
 		this.setUserId(userId);
-		this.setusername(username);
+		this.setUsername(username);
 		this.setPassword(password);
-		this.setFirstName(firstName);
-		this.setLastName(lastName);
+		this.setFirstname(firstname);
+		this.setLastname(lastname);
 	}
 	
 	public User(){
@@ -45,11 +46,11 @@ public class User implements Serializable{
 		this.userId = userId;
 	}
 
-	public String getusername() {
+	public String getUsername() {
 		return username;
 	}
 
-	public void setusername(String username) {
+	public void setUsername(String username) {
 		this.username = username;
 	}
 
@@ -61,21 +62,19 @@ public class User implements Serializable{
 		this.password = password;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getFirstname() {
+		return firstname;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getLastname() {
+		return lastname;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	
-	
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}	
 }
