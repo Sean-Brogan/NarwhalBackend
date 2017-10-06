@@ -7,13 +7,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Entity
 @Table(name="users")
 public class User implements Serializable
 {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="userid")
 	private int userId;
 	@Column(name="username")
@@ -24,14 +25,22 @@ public class User implements Serializable
 	private String firstname;
 	@Column(name="lastname")
 	private String lastname;
+        @Column(name="DOB")
+        private Date DOB;
+        @Column(name="SSN")
+        private int SSN;
+        @Column(name="isAlive")
+        private boolean isAlive;
 	
-	public User(int userId, String username, String password, String firstname, String lastname){
+	public User(String username, String password, String firstname, String lastname, Date DOB, int SSN, boolean isAlive){
 		super();
-		this.setUserId(userId);
 		this.setUsername(username);
 		this.setPassword(password);
 		this.setFirstname(firstname);
 		this.setLastname(lastname);
+                this.setDateOfBirth(DOB);
+                this.setSSN(SSN);
+                this.setIsAlive(isAlive);
 	}
 	
 	public User(){
@@ -76,5 +85,29 @@ public class User implements Serializable
 
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
-	}	
+	}
+        
+        public Date getDateOfBirth(){
+                return DOB;
+        }
+        
+        public void setDateOfBirth(Date DOB){
+                this.DOB = DOB;
+        }
+        
+        public int getSSN(){
+                return SSN;
+        }
+        
+        public void setSSN(int SSN){
+                this.SSN = SSN;
+        }
+        
+        public boolean getIsAlive(){
+                return isAlive;
+        }
+        
+        public void setIsAlive(boolean isAlive){
+                this.isAlive = isAlive;
+        }
 }
