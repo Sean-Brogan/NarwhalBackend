@@ -19,76 +19,48 @@ public class MedicalRecord implements Serializable
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="recordid")
     private int recordId;
-    @JoinColumn(name="userid")
+    @JoinColumn(name="userId")
     private int patientId;
-    @JoinColumn(name="userid")	
-    private int doctorId;
-    @Column(name="treatment")
-    private String treatment;
-    @Column(name="description")
-    private String description;
+    @JoinColumn(name="conditionId")
+    private int recordTypeId;
     @Column(name="recordDate")
     private Date recordDate;
-	
-    public MedicalRecord(int recordId, int patientId, int doctorId, String treatment, String description, Date recordDate)
-    {
+    
+    public MedicalRecord(int patientId, int recordTypeId, Date recordDate){
         super();
-        this.setRecordId(recordId);
-        this.setPatientId(patientId);
-        this.setDoctorId(doctorId);
-        this.setTreatment(treatment);
-        this.setDescription(description);
-        this.setRecordDate(recordDate);
+        this.patientId = patientId;
+        this.recordTypeId = recordTypeId;
+        this.recordDate = recordDate;
     }
-	
+    
     public MedicalRecord(){
         super();
     }
-	
+
     public int getRecordId(){
         return recordId;
     }
-	
-    public void setRecordId(int recordId){
-        this.recordId = recordId;
-    }
-	
-    public int getPatientId(){
+    
+    public int getpatientId(){
         return patientId;
     }
-	
+    
     public void setPatientId(int patientId){
-        this.patientId = patientId;
+        this.recordId = recordId;
     }
-	
-    public int getDoctorId(){
-        return doctorId;
+    
+    public int getRecordTypeId(){
+        return recordTypeId;
     }
-	
-    public void setDoctorId(int doctorId){
-        this.doctorId = doctorId;
+    
+    public void setRecordTypeId(int recordTypeId){
+        this.recordTypeId = recordTypeId;
     }
-	
-    public String getTreatment(){
-        return treatment;
-    }
-	
-    public void setTreatment(String treatment){
-        this.treatment = treatment;
-    }
-	
-    public String getDescription(){
-        return description;
-    }
-	
-    public void setDescription(String description){
-        this.description = description;
-    }
-	
+    
     public Date getRecordDate(){
         return recordDate;
     }
-	
+    
     public void setRecordDate(Date recordDate){
         this.recordDate = recordDate;
     }

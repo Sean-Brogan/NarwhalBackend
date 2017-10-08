@@ -3,22 +3,24 @@ package main.java.Classes;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name="conditionType")
 public class ConditionType implements Serializable
 {
-    @Id @Column(name="conditionId")
+    @Id 
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="conditionId")
     private int conditionId;
     @Column(name="conditionName")
     private String conditionName;
     
-    public ConditionType(int conditionId, String conditionName){
+    public ConditionType(String conditionName){
         super();
-        this.setConditionId(conditionId);
         this.setConditionName(conditionName);
     }
     
@@ -29,11 +31,7 @@ public class ConditionType implements Serializable
     public int getConditionId(){
         return conditionId;
     }
-    
-    public void setConditionId(int conditionId){
-        this.conditionId = conditionId;
-    }
-    
+ 
     public String getConditionName(){
         return conditionName;
     }

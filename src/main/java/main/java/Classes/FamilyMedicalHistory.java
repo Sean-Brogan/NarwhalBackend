@@ -17,5 +17,8 @@ public class FamilyMedicalHistory implements Serializable{
     @Id @JoinColumn(name="userId")
     private int relationId;
     @Id @Column
-    private ConditionType condition;
+    private int conditionId;
+
+    //might not need this table, could just have a patient have a list of relations 
+    //and return pertanent records based on that from the medical records table
 }
