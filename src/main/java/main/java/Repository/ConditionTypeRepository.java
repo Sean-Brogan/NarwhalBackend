@@ -1,5 +1,6 @@
 package main.java.Repository;
 
+import main.java.Repository.Interfaces.IConditionTypeRepository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;

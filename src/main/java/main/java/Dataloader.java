@@ -1,12 +1,14 @@
-package main.java.Classes;
+package main.java;
 
 import java.util.Date;
+import main.java.Classes.ConditionType;
+import main.java.Classes.User;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
-import main.java.Repository.IUserRepository;
-import main.java.Repository.IConditionTypeRepository;
+import main.java.Repository.Interfaces.IUserRepository;
+import main.java.Repository.Interfaces.IConditionTypeRepository;
 
 @Component
 public class Dataloader implements ApplicationRunner {

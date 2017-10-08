@@ -1,5 +1,6 @@
 package main.java.Repository;
 
+import main.java.Repository.Interfaces.IMedicalRecordRepository;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

@@ -1,4 +1,4 @@
-package main.java.Repository;
+package main.java.Repository.Interfaces;
 
 import java.util.List;
 import main.java.Classes.User;

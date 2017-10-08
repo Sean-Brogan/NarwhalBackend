@@ -3,7 +3,7 @@ package main.java.Services.Users;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import main.java.Repository.IUserRepository;
+import main.java.Repository.Interfaces.IUserRepository;
 import main.java.Classes.User;
 
 @Service

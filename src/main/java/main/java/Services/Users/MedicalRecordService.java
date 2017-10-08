@@ -3,7 +3,7 @@ package main.java.Services.Users;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import main.java.Repository.IMedicalRecordRepository;
+import main.java.Repository.Interfaces.IMedicalRecordRepository;
 import main.java.Classes.MedicalRecord;
 
 @Service
