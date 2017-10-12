@@ -1,5 +1,6 @@
 package main.java.Repository;
 
+import main.java.Repository.Interfaces.IUserRepository;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,7 +18,7 @@ public class UserRepository implements IUserRepository{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> getAllUsers() {
-		String hql = "FROM User as user ORDER BY user.UserId DESC";
+		String hql = "FROM User as user ORDER BY user.Userid DESC";
 		return (List<User>) entityManager.createQuery(hql).getResultList();
 	}
 	
@@ -33,9 +34,9 @@ public class UserRepository implements IUserRepository{
 	
 	@Override
 	public void updateUser(User user) {
-		User artcl = getUserById(user.getUserId());
-		user.setFirstName(user.getFirstName());
-		user.setLastName(user.getLastName());
+		User holderUser = getUserById(user.getUserId());
+		holderUser.setFirstname(user.getFirstname());
+		holderUser.setLastname(user.getLastname());
 		entityManager.flush();
 	}
 	
@@ -46,7 +47,7 @@ public class UserRepository implements IUserRepository{
 	
 	@Override
 	public boolean loginExists(String username, String password) {
-		String hql = "FROM Users WHERE username = ? and password = ?";
+		String hql = "FROM User as user WHERE user.username = ? and user.password = ?";
 		int count = entityManager.createQuery(hql).setParameter(1, username)
 		              .setParameter(2, password).getResultList().size();
 		return count > 0 ? true : false;
@@ -54,7 +55,7 @@ public class UserRepository implements IUserRepository{
 	
 	@Override
 	public User getUserWithLogin(String username, String password){
-		String hql = "FROM Users as user WHERE user.username = ? and user.password = ?";
+		String hql = "FROM User as user WHERE user.username = ? and user.password = ?";
 		User user = (User) entityManager.createQuery(hql).setParameter(1, username)
 						.setParameter(2, password).getResultList().get(0);
 		return user;
