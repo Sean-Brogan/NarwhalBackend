@@ -21,14 +21,17 @@ public class MedicalRecord implements Serializable
     private int recordId;
     @JoinColumn(name="userId")
     private int patientId;
+    @JoinColumn(name="userId")
+    private int doctorId;
     @JoinColumn(name="conditionId")
     private int recordTypeId;
     @Column(name="recordDate")
     private Date recordDate;
     
-    public MedicalRecord(int patientId, int recordTypeId, Date recordDate){
+    public MedicalRecord(int patientId, int doctorId, int recordTypeId, Date recordDate){
         super();
         this.patientId = patientId;
+        this.doctorId = doctorId;
         this.recordTypeId = recordTypeId;
         this.recordDate = recordDate;
     }
@@ -41,12 +44,20 @@ public class MedicalRecord implements Serializable
         return recordId;
     }
     
-    public int getpatientId(){
+    public int getPatientId(){
         return patientId;
     }
     
     public void setPatientId(int patientId){
-        this.recordId = recordId;
+        this.patientId = patientId;
+    }
+    
+    public int getDoctorId(){
+        return doctorId;
+    }
+    
+    public void setDoctorId(int doctorId){
+        this.doctorId = doctorId;
     }
     
     public int getRecordTypeId(){

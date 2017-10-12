@@ -31,10 +31,12 @@ public class User implements Serializable
         private int SSN;
         @Column(name="isAlive")
         private boolean isAlive;
+        @Column(name="DOD")
+        private Date DOD;
         @Column(name="permissionLevel")
         private int permissionLevel;
 	
-	public User(String username, String password, String firstname, String lastname, Date DOB, int SSN, boolean isAlive, int permissionLevel){
+	public User(String username, String password, String firstname, String lastname, Date DOB, int SSN, boolean isAlive, Date DOD, int permissionLevel){
 		super();
 		this.setUsername(username);
 		this.setPassword(password);
@@ -43,6 +45,7 @@ public class User implements Serializable
                 this.setDateOfBirth(DOB);
                 this.setSSN(SSN);
                 this.setIsAlive(isAlive);
+                this.DOD = DOD;
                 this.setPermissionLevel(permissionLevel);
 	}
 	

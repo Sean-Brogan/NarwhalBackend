@@ -27,8 +27,8 @@ public class Dataloader implements ApplicationRunner {
 
     public void run(ApplicationArguments args) {
         //when more users are added maybe make a list of them and then loop the create function on the List objects
-        userRepository.createUser(new User("SuperAdmin", "Narwhal123", "Sean", "Brogan", new Date(), 123456789, true, 2));
-        userRepository.createUser(new User("SuperUser", "Narwhal123", "Sean", "Brogan", new Date(), 987654321, true, 1));
+        userRepository.createUser(new User("SuperAdmin", "Narwhal123", "Sean", "Brogan", new Date(), 123456789, true, null, 2));
+        userRepository.createUser(new User("SuperUser", "Narwhal123", "Sean", "Brogan", new Date(), 987654321, true, null, 1));
 
         
         
