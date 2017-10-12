@@ -1,5 +1,6 @@
 package main.java.Repository;
 
+import main.java.Repository.Interfaces.IUserRepository;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,7 +18,7 @@ public class UserRepository implements IUserRepository{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> getAllUsers() {
-		String hql = "FROM User as user ORDER BY user.UserId DESC";
+		String hql = "FROM User as user ORDER BY user.Userid DESC";
 		return (List<User>) entityManager.createQuery(hql).getResultList();
 	}
 	
@@ -33,9 +34,9 @@ public class UserRepository implements IUserRepository{
 	
 	@Override
 	public void updateUser(User user) {
-		User artcl = getUserById(user.getUserId());
-		user.setFirstName(user.getFirstName());
-		user.setLastName(user.getLastName());
+		User holderUser = getUserById(user.getUserId());
+		holderUser.setFirstname(user.getFirstname());
+		holderUser.setLastname(user.getLastname());
 		entityManager.flush();
 	}
 	
