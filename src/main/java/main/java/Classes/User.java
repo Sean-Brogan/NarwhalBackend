@@ -31,8 +31,10 @@ public class User implements Serializable
         private int SSN;
         @Column(name="isAlive")
         private boolean isAlive;
+        @Column(name="permissionLevel")
+        private int permissionLevel;
 	
-	public User(String username, String password, String firstname, String lastname, Date DOB, int SSN, boolean isAlive){
+	public User(String username, String password, String firstname, String lastname, Date DOB, int SSN, boolean isAlive, int permissionLevel){
 		super();
 		this.setUsername(username);
 		this.setPassword(password);
@@ -41,6 +43,7 @@ public class User implements Serializable
                 this.setDateOfBirth(DOB);
                 this.setSSN(SSN);
                 this.setIsAlive(isAlive);
+                this.setPermissionLevel(permissionLevel);
 	}
 	
 	public User(){
@@ -109,5 +112,13 @@ public class User implements Serializable
         
         public void setIsAlive(boolean isAlive){
                 this.isAlive = isAlive;
+        }
+        
+        public int getPermissionLevel(){
+            return permissionLevel;
+        }
+        
+        public void setPermissionLevel(int permissionLevel){
+            this.permissionLevel = permissionLevel;
         }
 }
