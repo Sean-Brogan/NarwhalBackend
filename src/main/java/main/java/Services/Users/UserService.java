@@ -3,7 +3,7 @@ package main.java.Services.Users;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import main.java.Repository.IUserRepository;
+import main.java.Repository.Interfaces.IUserRepository;
 import main.java.Classes.User;
 
 @Service
@@ -24,12 +24,12 @@ public class UserService implements IUserService {
 		
 	@Override
 	public synchronized boolean createUser(User user){
-               if (userRepository.loginExists(user.getUserName(), user.getPassword())) {
-    	           return false;
-               } else {
-            	   userRepository.createUser(user);
-    	           return true;
-               }
+		if (userRepository.loginExists(user.getUsername(), user.getPassword())) {
+			return false;
+		} else {
+			userRepository.createUser(user);
+			return true;
+		}
 	}
 	
 	@Override

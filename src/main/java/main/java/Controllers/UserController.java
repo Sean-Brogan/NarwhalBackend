@@ -1,6 +1,8 @@
 package main.java.Controllers;
 
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -37,7 +39,7 @@ public class UserController {
 	}
 	
 	@PostMapping("user")
-	public ResponseEntity<Void> createArticle(@RequestBody User user, UriComponentsBuilder builder) {
+	public ResponseEntity<Void> createUser(@RequestBody User user, UriComponentsBuilder builder) {
 		boolean flag = userService.createUser(user);
 		if (flag == false) {
 		     return new ResponseEntity<Void>(HttpStatus.CONFLICT);
@@ -48,7 +50,7 @@ public class UserController {
 	}
 	
 	@PutMapping("user")
-	public ResponseEntity<User> updateArticle(@RequestBody User user) {
+	public ResponseEntity<User> updateUser(@RequestBody User user) {
 		userService.updateUser(user);
 		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
@@ -60,12 +62,14 @@ public class UserController {
 	}
 	
 	@GetMapping("login")
-	public ResponseEntity<User> loginVerify(@RequestBody String username, String password) {
+	public ResponseEntity<User> loginVerify(@RequestParam Map<String, String> requestParams) {
+		String username = requestParams.get("username");
+		String password = requestParams.get("password");
 		boolean flag = userService.verifyLogin(username, password);
 		if (flag == false) {
-		     return new ResponseEntity<User>(HttpStatus.UNAUTHORIZED);
+		     return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
 		}
 		User user = userService.getUserWithLogin(username, password);
-		return new ResponseEntity<User>(user, HttpStatus.FOUND);
+		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
 } 
