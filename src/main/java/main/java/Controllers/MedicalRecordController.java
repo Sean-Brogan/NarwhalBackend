@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 import main.java.Classes.MedicalRecord;
-import main.java.Services.Users.IMedicalRecordService;
+import main.java.Services.Interfaces.IMedicalRecordService;
 
 @RestController
 public class MedicalRecordController {
@@ -31,7 +31,22 @@ public class MedicalRecordController {
 		List<MedicalRecord> list = medicalRecordService.getAllMedicalRecords();
 		return new ResponseEntity<List<MedicalRecord>>(list, HttpStatus.OK);
 	}
+        
+        @PostMapping("medicalRecord")
+        public ResponseEntity<Void> createMedicalRecord(@RequestBody MedicalRecord record, UriComponentsBuilder builder) {
+            //record sent in requires patientId, doctorId, the type of record (an int), and the date of the records creation
+            medicalRecordService.createMedicalRecord(record);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setLocation(builder.path("/medicalRecord?id={id}").buildAndExpand(record.getRecordId()).toUri());
+            return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+        }
+        
+        //one main medical record creation step which makes the index, then a different post to make the specific record that accepts the obj
+        
+        //private create methods that call the specific Class create method depending on what is sent in
 	
+        
+        
 	/* TODO : will need a point for getting all records a certain entity has access to
 			  this point can return the records in full and store them as a list within the session (we could do this at login)
 			  then when we need to display records we can do queries within the typescript on the List we have in the cache

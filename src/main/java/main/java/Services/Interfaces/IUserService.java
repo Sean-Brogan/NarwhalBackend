@@ -1,4 +1,4 @@
-package main.java.Services.Users;
+package main.java.Services.Interfaces;
 
 import java.util.List;
 import main.java.Classes.User;
