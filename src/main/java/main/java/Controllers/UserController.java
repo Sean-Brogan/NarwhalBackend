@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 import main.java.Classes.User;
-import main.java.Services.Users.IUserService;
+import main.java.Services.Interfaces.IUserService;
 
 @RestController
 public class UserController {
