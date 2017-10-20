@@ -4,7 +4,15 @@ import main.java.Services.Interfaces.IMedicalRecordService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+//Repository
 import main.java.Repository.Interfaces.IMedicalRecordRepository;
+import main.java.Repository.Interfaces.IDiagnosisRepository;
+import main.java.Repository.Interfaces.IImmunizationRepository;
+import main.java.Repository.Interfaces.IMedicalTestRepository;
+import main.java.Repository.Interfaces.IMedicationRepository;
+import main.java.Repository.Interfaces.ISocialHistoryRepository;
+import main.java.Repository.Interfaces.ISurgeryRepository;
+//Classes
 import main.java.Classes.MedicalRecord;
 import main.java.Classes.MedicalRecordTypes.Diagnosis;
 import main.java.Classes.MedicalRecordTypes.Immunization;
@@ -17,11 +25,23 @@ import main.java.Classes.MedicalRecordTypes.Surgery;
 public class MedicalRecordService implements IMedicalRecordService{
 	@Autowired
 	private IMedicalRecordRepository medicalRecordRepository;
+        @Autowired
+        private IDiagnosisRepository diagnosisRepository;
+        @Autowired
+        private IImmunizationRepository immunizationRepository;
+        @Autowired
+        private IMedicalTestRepository medicalTestRepository;
+        @Autowired
+        private IMedicationRepository medicationRepository;
+        @Autowired
+        private ISocialHistoryRepository socialHistoryRepository;
+        @Autowired
+        private ISurgeryRepository surgeryRepository;
 	
         //Generic Medical Record Index Management Service Calls
 	@Override
-	public List<MedicalRecord> getAllMedicalRecords(){
-		return medicalRecordRepository.getAllMedicalRecords();
+	public List<MedicalRecord> getAllMedicalRecords(int id){
+		return medicalRecordRepository.getAllMedicalRecords(id);
 	}
 	
 	@Override
@@ -51,70 +71,72 @@ public class MedicalRecordService implements IMedicalRecordService{
         
         //Diagnosis Record Service Calls
         @Override
-        Diagnosis getDiagnosisRecordById(int recordId){
-            
+        public Diagnosis getDiagnosisRecordById(int recordId){
+            return diagnosisRepository.getDiagnosisById(recordId);
         }
         
         @Override
-        void createDiagnosisRecord(Diagnosis record){
-            
+        public void createDiagnosisRecord(Diagnosis record){
+            diagnosisRepository.createDiagnosisRecord(record);
         }
     
+        
         //Immunization Record Serivice Calls
         @Override
-        Immunization getImmunizationRecordById(int recordId){
-            
+        public Immunization getImmunizationRecordById(int recordId){
+            return immunizationRepository.getImmunizationById(recordId);
         }
         
         @Override
-        void createImmunizationRecord(Immunization record){
-            
+        public void createImmunizationRecord(Immunization record){
+            immunizationRepository.createImmunizationRecord(record);
         }
     
         
         //MedicalTest Record Serivice Calls
         @Override
-        MedicalTest getMedicalTestRecordById(int recordId){
-            
+        public MedicalTest getMedicalTestRecordById(int recordId){
+            return medicalTestRepository.getMedicalTestById(recordId);
         }
         
         @Override
-        void createMedicalTest(MedicalTest record){
-            
+        public void createMedicalTest(MedicalTest record){
+            medicalTestRepository.createMedicalTestRecord(record);
         }
     
         
         //Medication Record Serivice Calls
         @Override
-        Medication getMedicationRecordById(int recordId){
-            
+        public Medication getMedicationRecordById(int recordId){
+            return medicationRepository.getMedicationById(recordId);
         }
         
         @Override
-        void createMedicationRecord(Medication record){
-            
+        public void createMedicationRecord(Medication record){
+            medicationRepository.createMedicationRecord(record);
         }
+        
         
         //SocialHistory Record Serivice Calls
         @Override
-        SocialHistory getSocialHistoryTestRecordById(int recordId){
-            
+        public SocialHistory getSocialHistoryTestRecordById(int recordId){
+            return socialHistoryRepository.getSocialHistoryById(recordId);
         }
         
         @Override
-        void createSocialHistory(SocialHistory record){
-            
+        public void createSocialHistory(SocialHistory record){
+            socialHistoryRepository.createSocialHistoryRecord(record);
         }
     
 
         //Surgery Record Serivice Calls
         @Override
-        Surgery getSurgeryRecordById(int recordId){
-            
+        public Surgery getSurgeryRecordById(int recordId){
+            return surgeryRepository.getSurgeryById(recordId);
         }
         
         @Override
-        void createSurgeryRecord(Surgery record){
-            
+        public void createSurgeryRecord(Surgery record){
+            surgeryRepository.createSurgeryRecord(record);
         }
 }

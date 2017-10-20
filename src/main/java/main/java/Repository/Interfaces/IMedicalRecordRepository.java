@@ -4,7 +4,7 @@ import java.util.List;
 import main.java.Classes.MedicalRecord;
 
 public interface IMedicalRecordRepository {
-	List<MedicalRecord> getAllMedicalRecords();
+	List<MedicalRecord> getAllMedicalRecords(int id);
 	MedicalRecord getMedicalRecordById(int recordId);
 	void createMedicalRecord(MedicalRecord medicalRecord);
 	void updateMedicalRecord(MedicalRecord medicalRecord);
