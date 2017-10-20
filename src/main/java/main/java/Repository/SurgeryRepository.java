@@ -4,7 +4,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import main.java.Classes.MedicalRecordTypes.Surgery;
 import main.java.Repository.Interfaces.ISurgeryRepository;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
+@Repository
 public class SurgeryRepository implements ISurgeryRepository{
     
     @PersistenceContext	
