@@ -1,5 +1,6 @@
-package main.java.Services.Users;
+package main.java.Services;
 
+import main.java.Services.Interfaces.IUserService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
