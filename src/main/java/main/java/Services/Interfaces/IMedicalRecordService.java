@@ -11,7 +11,7 @@ import main.java.Classes.MedicalRecordTypes.Surgery;
 
 public interface IMedicalRecordService {
     //medical record index
-    List<MedicalRecord> getAllMedicalRecords();
+    List<MedicalRecord> getAllMedicalRecords(int id);
     MedicalRecord getMedicalRecordById(int recordId);
     void createMedicalRecord(MedicalRecord medicalRecord);
     void updateMedicalRecord(MedicalRecord medicalRecord);

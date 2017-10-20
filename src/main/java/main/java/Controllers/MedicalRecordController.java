@@ -34,8 +34,8 @@ public class MedicalRecordController {
 	private IMedicalRecordService medicalRecordService;
 	
 	@GetMapping("all-medicalrecords")
-	public ResponseEntity<List<MedicalRecord>> getAllMedicalRecords() {
-		List<MedicalRecord> list = medicalRecordService.getAllMedicalRecords();
+	public ResponseEntity<List<MedicalRecord>> getAllMedicalRecords(@RequestParam("id") String id){
+		List<MedicalRecord> list = medicalRecordService.getAllMedicalRecords(Integer.parseInt(id));
 		return new ResponseEntity<List<MedicalRecord>>(list, HttpStatus.OK);
 	}
         
@@ -54,7 +54,7 @@ public class MedicalRecordController {
 	@PostMapping("diagnosis")
         public ResponseEntity<Void> createDiagnosisRecord(@RequestBody Diagnosis record, UriComponentsBuilder builder) {
             //record sent in requires patientId, doctorId, the type of record (an int), and the date of the records creation
-            medicalRecordService.createMedicalRecord(record);
+            medicalRecordService.createDiagnosisRecord(record);
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(builder.path("/medicalRecord?id={id}").buildAndExpand(record.getRecordId()).toUri());
             return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
