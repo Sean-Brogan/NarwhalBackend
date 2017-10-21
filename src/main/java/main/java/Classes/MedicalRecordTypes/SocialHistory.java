@@ -14,10 +14,12 @@ public class SocialHistory implements Serializable
     @Id
     @JoinColumn(name="recordId")
     private int recordId;
+    /*
     @JoinColumn(name="userId")
     private int patientId;
     @JoinColumn(name="userId")
     private int doctorId;
+    */
     @Column(name="smokes")
     private boolean smokes;
     @Column(name="amountSmokes")
@@ -27,10 +29,12 @@ public class SocialHistory implements Serializable
     @Column(name="amountDrinks")
     private int amountDrinks;
     
-    public SocialHistory(int patientId, int doctorId, boolean smokes, int amountSmokes, boolean drinks, int amountDrinks){
+    public SocialHistory(boolean smokes, int amountSmokes, boolean drinks, int amountDrinks){
         super();
+        /*
         this.patientId = patientId;
         this.doctorId = doctorId;
+        */
         this.smokes = smokes;
         this.amountSmokes = amountSmokes;
         this.drinks = drinks;
@@ -48,7 +52,7 @@ public class SocialHistory implements Serializable
     public void setRecordId(int recordId) {
         this.recordId = recordId;
     }
-
+    /*
     public int getPatientId() {
         return patientId;
     }
@@ -64,7 +68,7 @@ public class SocialHistory implements Serializable
     public void setDoctorId(int doctorId) {
         this.doctorId = doctorId;
     }
-
+    */
     public boolean isSmokes() {
         return smokes;
     }

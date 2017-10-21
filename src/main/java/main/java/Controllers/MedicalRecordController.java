@@ -42,7 +42,7 @@ public class MedicalRecordController {
         @PostMapping("medicalRecord")
         public ResponseEntity<Void> createMedicalRecord(@RequestBody MedicalRecord record, UriComponentsBuilder builder) {
             //record sent in requires patientId, doctorId, the type of record (an int), and the date of the records creation
-            medicalRecordService.createMedicalRecord(record);
+            int id = medicalRecordService.createMedicalRecord(record);
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(builder.path("/medicalRecord?id={id}").buildAndExpand(record.getRecordId()).toUri());
             return new ResponseEntity<Void>(headers, HttpStatus.CREATED);

@@ -7,15 +7,11 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import main.java.Classes.MedicalRecord;
-import main.java.Classes.RecordAccess;
-import main.java.Repository.Interfaces.IRecordAccessRepository;
 
 @Transactional
 @Repository
 public class MedicalRecordRepository implements IMedicalRecordRepository{
 
-        private IRecordAccessRepository recordAccessRepository;
-    
 	@PersistenceContext	
 	private EntityManager entityManager;
 	
@@ -34,14 +30,9 @@ public class MedicalRecordRepository implements IMedicalRecordRepository{
 	}
 	
 	@Override
-	public void createMedicalRecord(MedicalRecord medicalRecord) {
+	public int createMedicalRecord(MedicalRecord medicalRecord) {
                 entityManager.persist(medicalRecord);
-                entityManager.flush();
-                int newId = medicalRecord.getRecordId();
-                RecordAccess patient = new RecordAccess(newId, medicalRecord.getPatientId());
-                recordAccessRepository.createRecordAccess(patient);
-                RecordAccess doctor = new RecordAccess(newId, medicalRecord.getDoctorId());
-                recordAccessRepository.createRecordAccess(doctor);
+                return medicalRecord.getRecordId();
 	}
 	
 	@Override

@@ -20,6 +20,8 @@ import main.java.Classes.MedicalRecordTypes.MedicalTest;
 import main.java.Classes.MedicalRecordTypes.Medication;
 import main.java.Classes.MedicalRecordTypes.SocialHistory;
 import main.java.Classes.MedicalRecordTypes.Surgery;
+import main.java.Classes.RecordAccess;
+import main.java.Repository.Interfaces.IRecordAccessRepository;
 
 @Service
 public class MedicalRecordService implements IMedicalRecordService{
@@ -37,6 +39,9 @@ public class MedicalRecordService implements IMedicalRecordService{
         private ISocialHistoryRepository socialHistoryRepository;
         @Autowired
         private ISurgeryRepository surgeryRepository;
+        @Autowired
+        private IRecordAccessRepository recordAccessRepository;
+
 	
         //Generic Medical Record Index Management Service Calls
 	@Override
@@ -52,8 +57,14 @@ public class MedicalRecordService implements IMedicalRecordService{
 	}
 	
 	@Override
-	public void createMedicalRecord(MedicalRecord medicalRecord){
-		medicalRecordRepository.createMedicalRecord(medicalRecord);
+	public int createMedicalRecord(MedicalRecord medicalRecord){
+		int id = medicalRecordRepository.createMedicalRecord(medicalRecord);
+                MedicalRecord record = medicalRecordRepository.getMedicalRecordById(id);
+                RecordAccess patient = new RecordAccess(id, record.getPatientId());
+                recordAccessRepository.createRecordAccess(patient);
+                RecordAccess doctor = new RecordAccess(id, record.getDoctorId());
+                recordAccessRepository.createRecordAccess(doctor);
+                return id;
 	}
 	
 	@Override

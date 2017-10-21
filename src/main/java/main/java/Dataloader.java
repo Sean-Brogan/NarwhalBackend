@@ -3,15 +3,33 @@ package main.java;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+//Classes
 import main.java.Classes.ConditionType;
+import main.java.Classes.MedicalRecord;
 import main.java.Classes.User;
+import main.java.Classes.MedicalRecordTypes.Diagnosis;
+import main.java.Classes.MedicalRecordTypes.Immunization;
+import main.java.Classes.MedicalRecordTypes.MedicalTest;
+import main.java.Classes.MedicalRecordTypes.Medication;
+import main.java.Classes.MedicalRecordTypes.SocialHistory;
+import main.java.Classes.MedicalRecordTypes.Surgery;
+
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
+//Repos
 import main.java.Repository.Interfaces.IUserRepository;
 import main.java.Repository.Interfaces.IConditionTypeRepository;
 import main.java.Repository.Interfaces.IMedicalRecordRepository;
+import main.java.Repository.Interfaces.IDiagnosisRepository;
+import main.java.Repository.Interfaces.IImmunizationRepository;
+import main.java.Repository.Interfaces.IMedicalTestRepository;
+import main.java.Repository.Interfaces.IMedicationRepository;
+import main.java.Repository.Interfaces.ISocialHistoryRepository;
+import main.java.Repository.Interfaces.ISurgeryRepository;
+
+import main.java.Services.Interfaces.IMedicalRecordService;
 
 @Component
 public class Dataloader implements ApplicationRunner {
@@ -19,13 +37,33 @@ public class Dataloader implements ApplicationRunner {
     private IUserRepository userRepository;
     private IConditionTypeRepository conditionTypeRepository;
     private IMedicalRecordRepository medicalRecordRepository;
+    private IDiagnosisRepository diagnosisRepository;
+    private IImmunizationRepository immunizationRepository;
+    private IMedicalTestRepository medicalTestRepository;
+    private IMedicationRepository medicationRepository;
+    private ISocialHistoryRepository socialHistoryRepository;
+    private ISurgeryRepository surgeryRepository;
+    
+    private IMedicalRecordService medicalRecordService;
     //add medical records of various classes
        
     @Autowired
-    public Dataloader(IUserRepository userRepository, IConditionTypeRepository condtionTypeRepository, IMedicalRecordRepository medicalRecordRepository) {
+    public Dataloader(
+            IUserRepository userRepository, IConditionTypeRepository condtionTypeRepository, IMedicalRecordRepository medicalRecordRepository,
+            IDiagnosisRepository diagnosisRepository, IImmunizationRepository immunizationRepository, IMedicalTestRepository medicalTestRepository,
+            IMedicationRepository medicationRepository, ISocialHistoryRepository socialHistoryRepository, ISurgeryRepository surgeryRepository,
+            IMedicalRecordService medicalRecordService) {
         this.userRepository = userRepository;
         this.conditionTypeRepository = condtionTypeRepository;
         this.medicalRecordRepository = medicalRecordRepository;
+        this.diagnosisRepository = diagnosisRepository;
+        this.immunizationRepository = immunizationRepository;
+        this.medicalTestRepository = medicalTestRepository;
+        this.medicationRepository = medicationRepository;
+        this.socialHistoryRepository = socialHistoryRepository;
+        this.surgeryRepository = surgeryRepository;
+        this.medicalRecordService = medicalRecordService;
+                
         //add the reposiory of the requred category here (so you can access the create method)
     }
 
@@ -77,6 +115,7 @@ public class Dataloader implements ApplicationRunner {
             userRepository.createUser(users.get(i));
         }
         
+        //adding the different types of records
         conditionTypeRepository.createConditionType(new ConditionType("Diagnosis"));
         conditionTypeRepository.createConditionType(new ConditionType("Immunization"));
         conditionTypeRepository.createConditionType(new ConditionType("MedicalTest"));
@@ -84,9 +123,75 @@ public class Dataloader implements ApplicationRunner {
         conditionTypeRepository.createConditionType(new ConditionType("SocialHistory"));
         conditionTypeRepository.createConditionType(new ConditionType("Surgery"));
 
-
-
-        //use the coresponding repo to grab the create function
+        //adding medical records
+        //should insert a generic record and then the specific one
+        List<MedicalRecord> indexRecords = new ArrayList<MedicalRecord>();
+        List<Diagnosis> diagnosisRecords = new ArrayList<Diagnosis>();        
+        List<Immunization> immunizationRecords = new ArrayList<Immunization>();
+        List<MedicalTest> medicalTestRecords = new ArrayList<MedicalTest>();
+        List<Medication> medicationRecords = new ArrayList<Medication>();
+        List<SocialHistory> socialHistoryRecords = new ArrayList<SocialHistory>();
+        List<Surgery> surgeryRecords = new ArrayList<Surgery>();
+        
+        //                                   patientId   doctorId    conditionId    recordDate
+        indexRecords.add(new MedicalRecord(     11,         1,            1,        new Date()));
+        //                                   diagnosis   diagnosisDetails
+        diagnosisRecords.add(new Diagnosis("Common Cold", "Random information here"));        
+        indexRecords.add(new MedicalRecord(12, 1, 2, new Date()));
+        //                                       immunization
+        immunizationRecords.add(new Immunization("Common Cold"));
+        indexRecords.add(new MedicalRecord(11, 1, 3, new Date()));
+        //                                   testName       testResult
+        medicalTestRecords.add(new MedicalTest("X-Ray", "We found a metal rod inbeded in his leg, stange we didn't just see it since it's just wedged in there"));
+        indexRecords.add(new MedicalRecord(11, 1, 4, new Date()));
+        //                                    frequency       dosage  deliveryMethod      experiationDate  
+        medicationRecords.add(new Medication("Twice Daily",     2,      "by mouth",    new Date(8/17/2020)));
+        indexRecords.add(new MedicalRecord(11, 1, 5, new Date()));
+        //                                          smokes?     amountSmokes      drinks?    amountDrinks 
+        socialHistoryRecords.add(new SocialHistory(  true,          2,             false,        0));
+        indexRecords.add(new MedicalRecord(11, 1, 6, new Date()));
+        //                            surgeryName                   surgeryResults
+        surgeryRecords.add(new Surgery("Brain Transplant", "Patient is now in the new body"));
+ 
+        //looping through all the lists we've made of data
+        int currentDiagIndex = 0;
+        int currentImmuIndex = 0;
+        int currentMedTestIndex = 0;
+        int currentMedicationIndex = 0;
+        int currentSocialIndex = 0;
+        int currentSurgeryIndex = 0;
+        for (int i = 0; i < indexRecords.size(); i++){
+            int id = medicalRecordService.createMedicalRecord(indexRecords.get(i));
+            if(indexRecords.get(i).getRecordTypeId() == 1){
+                diagnosisRecords.get(currentDiagIndex).setRecordId(id);
+                diagnosisRepository.createDiagnosisRecord(diagnosisRecords.get(currentDiagIndex));
+                currentDiagIndex++;
+            }
+            else if(indexRecords.get(i).getRecordTypeId() == 2){
+                immunizationRecords.get(currentImmuIndex).setRecordId(id);
+                immunizationRepository.createImmunizationRecord(immunizationRecords.get(currentImmuIndex));
+                currentImmuIndex++;
+            }
+            else if(indexRecords.get(i).getRecordTypeId() == 3){
+                medicalTestRecords.get(currentMedTestIndex).setRecordId(id);
+                medicalTestRepository.createMedicalTestRecord(medicalTestRecords.get(currentMedTestIndex));
+                currentMedTestIndex++;
+            }
+            else if(indexRecords.get(i).getRecordTypeId() == 4){
+                medicationRecords.get(currentMedicationIndex).setRecordId(id);
+                medicationRepository.createMedicationRecord(medicationRecords.get(currentMedicationIndex));
+                currentMedicationIndex++;
+            }
+            else if(indexRecords.get(i).getRecordTypeId() == 5){
+                socialHistoryRecords.get(currentSocialIndex).setRecordId(id);
+                socialHistoryRepository.createSocialHistoryRecord(socialHistoryRecords.get(currentSocialIndex));
+                currentSocialIndex++;
+            }
+            else if(indexRecords.get(i).getRecordTypeId() == 6){
+                surgeryRecords.get(currentSurgeryIndex).setRecordId(id);
+                surgeryRepository.createSurgeryRecord(surgeryRecords.get(currentSurgeryIndex));
+                currentSurgeryIndex++;
+            }
+        }
     }
-
 }
