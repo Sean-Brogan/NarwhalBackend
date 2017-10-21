@@ -14,17 +14,21 @@ public class Immunization implements Serializable
     @Id
     @JoinColumn(name="recordId")
     private int recordId;
+    /*
     @JoinColumn(name="userId")
     private int patientId;
     @JoinColumn(name="userId")
     private int doctorId;
+*/
     @Column(name="immunization")
     private String immunization;
     
-    public Immunization(int patientId, int doctorId, String immunization){
+    public Immunization(String immunization){
         super();
+        /*
         this.patientId = patientId;
         this.doctorId = doctorId;
+        */
         this.immunization = immunization;
     }
     
@@ -39,7 +43,7 @@ public class Immunization implements Serializable
     public void setRecordId(int recordId) {
         this.recordId = recordId;
     }
-
+    /*
     public int getPatientId() {
         return patientId;
     }
@@ -55,7 +59,7 @@ public class Immunization implements Serializable
     public void setDoctorId(int doctorId) {
         this.doctorId = doctorId;
     }
-
+    */
     public String getImmunization() {
         return immunization;
     }
