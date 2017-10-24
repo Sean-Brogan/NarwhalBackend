@@ -14,19 +14,23 @@ public class Surgery implements Serializable
     @Id
     @JoinColumn(name="recordId")
     private int recordId;
+    /*
     @JoinColumn(name="userId")
     private int patientId;
     @JoinColumn(name="userId")
     private int doctorId;
+    */
     @Column(name="surgeryName")
     private String surgeryName;
     @Column(name="surgeryResult")
     private String surgeryResult;
     
-    public Surgery(int patientId, int doctorId, String surgeryName, String surgeryResult){
+    public Surgery(String surgeryName, String surgeryResult){
         super();
+        /*
         this.patientId = patientId;
         this.doctorId = doctorId;
+        */
         this.surgeryName = surgeryName;
         this.surgeryResult = surgeryResult;
     }
@@ -42,7 +46,7 @@ public class Surgery implements Serializable
     public void setRecordId(int recordId) {
         this.recordId = recordId;
     }
-
+    /*
     public int getPatientId() {
         return patientId;
     }
@@ -58,7 +62,7 @@ public class Surgery implements Serializable
     public void setDoctorId(int doctorId) {
         this.doctorId = doctorId;
     }
-
+    */
     public String getSurgeryName() {
         return surgeryName;
     }

@@ -13,7 +13,7 @@ public interface IMedicalRecordService {
     //medical record index
     List<MedicalRecord> getAllMedicalRecords(int id);
     MedicalRecord getMedicalRecordById(int recordId);
-    void createMedicalRecord(MedicalRecord medicalRecord);
+    int createMedicalRecord(MedicalRecord medicalRecord);
     void updateMedicalRecord(MedicalRecord medicalRecord);
     void deleteMedicalRecord(int recordId);
         

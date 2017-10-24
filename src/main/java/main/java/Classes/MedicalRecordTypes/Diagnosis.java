@@ -14,19 +14,19 @@ public class Diagnosis implements Serializable
     @Id
     @JoinColumn(name="recordId")
     private int recordId;
+    /*
     @JoinColumn(name="userId")
     private int patientId;
     @JoinColumn(name="userId")
     private int doctorId;
+    */
     @Column(name="diagnosis")
     private String diagnosis;
     @Column(name="diagnosisDetails")
     private String diagnosisDetails;
     
-    public Diagnosis(int patientId, int doctorId, String diagnosis, String diagnosisDetails){
+    public Diagnosis(String diagnosis, String diagnosisDetails){
         super();
-        this.patientId = patientId;
-        this.doctorId = doctorId;
         this.diagnosis = diagnosis;
         this.diagnosisDetails = diagnosisDetails;
     }
@@ -42,7 +42,7 @@ public class Diagnosis implements Serializable
     public void setRecordId(int recordId) {
         this.recordId = recordId;
     }
-
+    /*
     public int getPatientId() {
         return patientId;
     }
@@ -58,7 +58,7 @@ public class Diagnosis implements Serializable
     public void setDoctorId(int doctorId) {
         this.doctorId = doctorId;
     }
-
+    */
     public String getDiagnosis() {
         return diagnosis;
     }
