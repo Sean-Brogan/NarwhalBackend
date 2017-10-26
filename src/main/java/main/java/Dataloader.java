@@ -142,16 +142,90 @@ public class Dataloader implements ApplicationRunner {
         immunizationRecords.add(new Immunization("Common Cold"));
         indexRecords.add(new MedicalRecord(11, 1, 3, new Date()));
         //                                   testName       testResult
-        medicalTestRecords.add(new MedicalTest("X-Ray", "We found a metal rod inbeded in his leg, stange we didn't just see it since it's just wedged in there"));
+        medicalTestRecords.add(new MedicalTest("X-Ray", "We found a metal rod imbedded in his leg, stange we didn't just see it since it's just wedged in there"));
         indexRecords.add(new MedicalRecord(11, 1, 4, new Date()));
-        //                                    frequency       dosage  deliveryMethod      experiationDate  
-        medicationRecords.add(new Medication("Twice Daily",     2,      "by mouth",    new Date(8/17/2020)));
+        //                                 medicationName     frequency       dosage  deliveryMethod      expirationDate  
+        medicationRecords.add(new Medication("Allegra",       "Twice Daily",     2,      "by mouth",    new Date(8/17/2020)));
         indexRecords.add(new MedicalRecord(11, 1, 5, new Date()));
         //                                          smokes?     amountSmokes      drinks?    amountDrinks 
         socialHistoryRecords.add(new SocialHistory(  true,          2,             false,        0));
         indexRecords.add(new MedicalRecord(11, 1, 6, new Date()));
         //                            surgeryName                   surgeryResults
         surgeryRecords.add(new Surgery("Brain Transplant", "Patient is now in the new body"));
+
+	indexRecords.add(new MedicalRecord(13, 1, 1, new Date()));
+	diagnosisRecords.add(new Diagnosis("Type 2 Diabetes", "Patient's blood sugar runs low."));
+
+	indexRecords.add(new MedicalRecord(14, 1, 1, new Date()));
+	diagnosisRecords.add(new Diagnosis("Pancreatitis", "Patient experiences chronic pain in the mid abdomen."));
+
+	indexRecords.add(new MedicalRecord(15, 1, 1, new Date()));
+	diagnosisRecords.add(new Diagnosis("Irritable Bowel Syndrome", "Patient has chronic diarrhea brought on by eating corn."));
+
+	indexRecords.add(new MedicalRecord(16, 1, 1, new Date()));
+	diagnosisRecords.add(new Diagnosis("Eczema", "Patient has red, itchy, scaly rash on left upper arm."));
+
+	indexRecords.add(new MedicalRecord(17, 4, 1, new Date()));
+	diagnosisRecords.add(new Diagnosis("Asthma", "Patient came in with narrowed airways."));
+
+        indexRecords.add(new MedicalRecord(22, 1, 3, new Date()));
+        medicalTestRecords.add(new MedicalTest("C-protein Blood test", "Results are within the normal range."));
+
+        indexRecords.add(new MedicalRecord(23, 1, 3, new Date()));
+        medicalTestRecords.add(new MedicalTest("Liver salinity test", "Results are near the lower end of the normal range."));
+
+        indexRecords.add(new MedicalRecord(24, 1, 3, new Date()));
+        medicalTestRecords.add(new MedicalTest("HIV test", "Results are negative."));
+
+        indexRecords.add(new MedicalRecord(25, 51, 3, new Date()));
+        medicalTestRecords.add(new MedicalTest("HIV test", "Results are positive."));
+
+        indexRecords.add(new MedicalRecord(26, 2, 3, new Date()));
+        medicalTestRecords.add(new MedicalTest("Uric acid test", "Results are within the normal range."));
+
+        indexRecords.add(new MedicalRecord(21, 1, 2, new Date()));
+
+        immunizationRecords.add(new Immunization("Influenza"));
+        indexRecords.add(new MedicalRecord(18, 1, 2, new Date()));
+
+        immunizationRecords.add(new Immunization("Tetanus"));
+        indexRecords.add(new MedicalRecord(19, 1, 2, new Date()));
+
+        immunizationRecords.add(new Immunization("HPV"));
+        indexRecords.add(new MedicalRecord(20, 2, 2, new Date()));
+
+        immunizationRecords.add(new Immunization("Anthrax"));
+        indexRecords.add(new MedicalRecord(21, 1, 2, new Date()));
+
+        immunizationRecords.add(new Immunization("Influenza"));
+
+
+        indexRecords.add(new MedicalRecord(25, 2, 4, new Date()));  
+        medicationRecords.add(new Medication("LiveForeveral",   "Once Weekly",     4,      "IV",    new Date(8/17/2018)));
+
+        indexRecords.add(new MedicalRecord(26, 3, 4, new Date()));  
+        medicationRecords.add(new Medication("BugBeGone",  "Once Daily",     1,      "Orally",    new Date(3/17/2018)));
+
+        indexRecords.add(new MedicalRecord(27, 1, 4, new Date()));  
+        medicationRecords.add(new Medication("PainSucker",  "Biweekly",     2,      "IM",    new Date(4/17/2018)));
+
+        indexRecords.add(new MedicalRecord(28, 1, 4, new Date()));  
+        medicationRecords.add(new Medication("PurePower",  "Three times daily",     2,      "Orally",    new Date(12/17/2017)));
+
+        indexRecords.add(new MedicalRecord(20, 4, 4, new Date()));  
+        medicationRecords.add(new Medication("NoMoreCleverIdeas",  "Once daily",     1,      "Orally",    new Date(1/17/2018)));
+
+        indexRecords.add(new MedicalRecord(27, 1, 5, new Date())); 
+        socialHistoryRecords.add(new SocialHistory(  false,          0,             false,        0));
+
+        indexRecords.add(new MedicalRecord(28, 2, 5, new Date()));
+        socialHistoryRecords.add(new SocialHistory(  true,          1,             true,        3));
+
+        indexRecords.add(new MedicalRecord(29, 1, 5, new Date())); 
+        socialHistoryRecords.add(new SocialHistory(  false,          0,             true,        1));
+
+        indexRecords.add(new MedicalRecord(30, 4, 5, new Date())); 
+        socialHistoryRecords.add(new SocialHistory(  false,          0,             true,        2));
  
         //looping through all the lists we've made of data
         int currentDiagIndex = 0;
