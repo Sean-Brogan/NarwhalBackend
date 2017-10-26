@@ -45,7 +45,7 @@ public class User implements Serializable
                 this.setDateOfBirth(DOB);
                 this.setSSN(SSN);
                 this.setIsAlive(isAlive);
-                this.DOD = DOD;
+                this.setDateOfDeath(DOD);
                 this.setPermissionLevel(permissionLevel);
 	}
 	
@@ -115,6 +115,14 @@ public class User implements Serializable
         
         public void setIsAlive(boolean isAlive){
                 this.isAlive = isAlive;
+        }
+        
+        public Date getDOD(){
+            return this.DOD;
+        }
+        
+        public void setDateOfDeath(Date DOD){
+            this.DOD = DOD;
         }
         
         public int getPermissionLevel(){

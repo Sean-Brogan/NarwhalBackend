@@ -1,6 +1,8 @@
 package main.java.Controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
+import java.util.Map;
 //Spring
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -33,30 +35,95 @@ public class MedicalRecordController {
 	@Autowired
 	private IMedicalRecordService medicalRecordService;
 	
+        //grabs all the avalible records for a particular User
 	@GetMapping("all-medicalrecords")
 	public ResponseEntity<List<MedicalRecord>> getAllMedicalRecords(@RequestParam("id") String id){
 		List<MedicalRecord> list = medicalRecordService.getAllMedicalRecords(Integer.parseInt(id));
 		return new ResponseEntity<List<MedicalRecord>>(list, HttpStatus.OK);
 	}
         
-        @PostMapping("medicalRecord")
-        public ResponseEntity<Void> createMedicalRecord(@RequestBody MedicalRecord record, UriComponentsBuilder builder) {
-            //record sent in requires patientId, doctorId, the type of record (an int), and the date of the records creation
-            medicalRecordService.createMedicalRecord(record);
-            HttpHeaders headers = new HttpHeaders();
-            headers.setLocation(builder.path("/medicalRecord?id={id}").buildAndExpand(record.getRecordId()).toUri());
-            return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+        @GetMapping("diagnosis")
+        public ResponseEntity<Diagnosis> getDiagnosisRecord(@RequestParam("id") String id){
+            Diagnosis record = medicalRecordService.getDiagnosisRecordById(Integer.parseInt(id));
+            return new ResponseEntity<Diagnosis>(record, HttpStatus.OK);
         }
         
-        //in front end have all createMedical record add and index
-        //the in a case/if based on the record type call the corect post below
+        @GetMapping("immunization")
+        public ResponseEntity<Immunization> getImmunizationRecord(@RequestParam("id") String id){
+            Immunization record = medicalRecordService.getImmunizationRecordById(Integer.parseInt(id));
+            return new ResponseEntity<Immunization>(record, HttpStatus.OK);
+        }
+        
+        @GetMapping("medicalTest")
+        public ResponseEntity<MedicalTest> getMedicalTestRecord(@RequestParam("id") String id){
+            MedicalTest record = medicalRecordService.getMedicalTestRecordById(Integer.parseInt(id));
+            return new ResponseEntity<MedicalTest>(record, HttpStatus.OK);
+        }
+        
+        @GetMapping("medication")
+        public ResponseEntity<Medication> getMedicationRecord(@RequestParam("id") String id){
+            Medication record = medicalRecordService.getMedicationRecordById(Integer.parseInt(id));
+            return new ResponseEntity<Medication>(record, HttpStatus.OK);
+        }
+        
+        @GetMapping("socialHistory")
+        public ResponseEntity<SocialHistory> getSocialHistoryRecord(@RequestParam("id") String id){
+            SocialHistory record = medicalRecordService.getSocialHistoryTestRecordById(Integer.parseInt(id));
+            return new ResponseEntity<SocialHistory>(record, HttpStatus.OK);
+        }
+        
+        @GetMapping("surgery")
+        public ResponseEntity<Surgery> getSurgeryRecord(@RequestParam("id") String id){
+            Surgery record = medicalRecordService.getSurgeryRecordById(Integer.parseInt(id));
+            return new ResponseEntity<Surgery>(record, HttpStatus.OK);
+        }
+        
+        @PostMapping("medicalRecord")
+        public ResponseEntity<Integer> createMedicalRecord(@RequestBody MedicalRecord record) {
+            //record sent in requires patientId, doctorId, the type of record (an int), and the date of the records creation
+            int id = medicalRecordService.createMedicalRecord(record);
+            return new ResponseEntity<Integer>(id, HttpStatus.CREATED);
+        }
         
 	@PostMapping("diagnosis")
-        public ResponseEntity<Void> createDiagnosisRecord(@RequestBody Diagnosis record, UriComponentsBuilder builder) {
+        public ResponseEntity<Void> createDiagnosisRecord(@RequestBody Diagnosis record) {
             //record sent in requires patientId, doctorId, the type of record (an int), and the date of the records creation
             medicalRecordService.createDiagnosisRecord(record);
-            HttpHeaders headers = new HttpHeaders();
-            headers.setLocation(builder.path("/medicalRecord?id={id}").buildAndExpand(record.getRecordId()).toUri());
-            return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
-        }		  
+            return new ResponseEntity<Void>(HttpStatus.CREATED);
+        }
+        
+        @PostMapping("immunization")
+        public ResponseEntity<Void> createImmunizationRecord(@RequestBody Immunization record) {
+            //record sent in requires patientId, doctorId, the type of record (an int), and the date of the records creation
+            medicalRecordService.createImmunizationRecord(record);
+            return new ResponseEntity<Void>(HttpStatus.CREATED);
+        }
+        
+        @PostMapping("medicalTest")
+        public ResponseEntity<Void> createMedicalTestRecord(@RequestBody MedicalTest record) {
+            //record sent in requires patientId, doctorId, the type of record (an int), and the date of the records creation
+            medicalRecordService.createMedicalTest(record);
+            return new ResponseEntity<Void>(HttpStatus.CREATED);
+        }
+        
+        @PostMapping("medication")
+        public ResponseEntity<Void> createMedicationRecord(@RequestBody Medication record) {
+            //record sent in requires patientId, doctorId, the type of record (an int), and the date of the records creation
+            medicalRecordService.createMedicationRecord(record);
+            return new ResponseEntity<Void>(HttpStatus.CREATED);
+        }
+        
+        @PostMapping("socialHistory")
+        public ResponseEntity<Void> createSocialHistoryRecord(@RequestBody SocialHistory record) {
+            //record sent in requires patientId, doctorId, the type of record (an int), and the date of the records creation
+            medicalRecordService.createSocialHistory(record);
+            return new ResponseEntity<Void>(HttpStatus.CREATED);
+        }
+        
+        @PostMapping("surgery")
+        public ResponseEntity<Void> createSurgeryRecord(@RequestBody Surgery record) {
+            //record sent in requires patientId, doctorId, the type of record (an int), and the date of the records creation
+            medicalRecordService.createSurgeryRecord(record);
+            return new ResponseEntity<Void>(HttpStatus.CREATED);
+        }
 }

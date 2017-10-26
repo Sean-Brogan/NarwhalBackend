@@ -7,25 +7,25 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import main.java.Classes.MedicalRecord;
-import main.java.Classes.RecordAccess;
 import main.java.Repository.Interfaces.IRecordAccessRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Transactional
 @Repository
 public class MedicalRecordRepository implements IMedicalRecordRepository{
 
-        private IRecordAccessRepository recordAccessRepository;
-    
 	@PersistenceContext	
 	private EntityManager entityManager;
+        @Autowired
+        private IRecordAccessRepository recordAccessRepository;
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<MedicalRecord> getAllMedicalRecords(int id) {
-                String hql1 = "SELECT recordId FROM RECORDACCESS WHERE userId = ?";
-                List records = entityManager.createQuery(hql1).setParameter(1, id).getResultList();
-                String hql2 = "FROM MEDICALRECORD as record WHERE recordId IN ? ORDER BY record.Recordid Desc";
-                return (List<MedicalRecord>) entityManager.createQuery(hql2).setParameter(1, records).getResultList();
+                List records = recordAccessRepository.recordsUserCanAccess(id);
+                String hql2 = "FROM MedicalRecord as record WHERE record.recordId IN ?1";
+                List<MedicalRecord> resultList = (entityManager.createQuery(hql2).setParameter(1, records)).getResultList();
+                return resultList;
 	}
 	
 	@Override
@@ -34,14 +34,9 @@ public class MedicalRecordRepository implements IMedicalRecordRepository{
 	}
 	
 	@Override
-	public void createMedicalRecord(MedicalRecord medicalRecord) {
+	public int createMedicalRecord(MedicalRecord medicalRecord) {
                 entityManager.persist(medicalRecord);
-                entityManager.flush();
-                int newId = medicalRecord.getRecordId();
-                RecordAccess patient = new RecordAccess(newId, medicalRecord.getPatientId());
-                recordAccessRepository.createRecordAccess(patient);
-                RecordAccess doctor = new RecordAccess(newId, medicalRecord.getDoctorId());
-                recordAccessRepository.createRecordAccess(doctor);
+                return medicalRecord.getRecordId();
 	}
 	
 	@Override

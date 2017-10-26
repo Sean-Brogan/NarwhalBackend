@@ -1,5 +1,6 @@
 package main.java.Repository;
 
+import java.util.List;
 import main.java.Repository.Interfaces.IRecordAccessRepository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,5 +21,11 @@ public class RecordAccessRepository implements IRecordAccessRepository{
     
     public void deleteRecordAccess(RecordAccess recordAccess){
         entityManager.remove(recordAccess);
+    }
+    
+    public List recordsUserCanAccess(int userId){
+        String hql1 = "SELECT recordId FROM RecordAccess as access WHERE access.userId = ?1";
+        List records = entityManager.createQuery(hql1).setParameter(1, userId).getResultList();
+        return records;
     }
 }

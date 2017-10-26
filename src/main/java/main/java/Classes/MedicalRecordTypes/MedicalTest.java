@@ -14,19 +14,23 @@ public class MedicalTest implements Serializable
     @Id
     @JoinColumn(name="recordId")
     private int recordId;
+    /*
     @JoinColumn(name="userId")
     private int patientId;
     @JoinColumn(name="userId")
     private int doctorId;
+*/
     @Column(name="testName")
     private String testName;
     @Column(name="testResult")
     private String testResult;
     
-    public MedicalTest(int patientId, int doctorId, String testName, String testResult){
+    public MedicalTest(String testName, String testResult){
         super();
+        /*
         this.patientId = patientId;
         this.doctorId = doctorId;
+        */
         this.testName = testName;
         this.testResult = testResult;
     }
@@ -42,7 +46,7 @@ public class MedicalTest implements Serializable
     public void setRecordId(int recordId) {
         this.recordId = recordId;
     }
-
+    /*
     public int getPatientId() {
         return patientId;
     }
@@ -58,7 +62,7 @@ public class MedicalTest implements Serializable
     public void setDoctorId(int doctorId) {
         this.doctorId = doctorId;
     }
-
+    */
     public String getTestName() {
         return testName;
     }
