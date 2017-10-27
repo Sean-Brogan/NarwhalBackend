@@ -22,6 +22,8 @@ public class Medication implements Serializable
     @JoinColumn(name="userId")
     private int doctorId;
     */
+    @Column(name="medicationName")
+    private String medicationName;
     @Column(name="frequency")
     private String frequency;
     @Column(name="dosage")
@@ -31,12 +33,13 @@ public class Medication implements Serializable
     @Column(name="experationDate")
     private Date experationDate;
     
-    public Medication(String frequency, int dosage, String deliveryMethod, Date experationDate){
+    public Medication(String medicationName, String frequency, int dosage, String deliveryMethod, Date experationDate){
         super();
         /*
         this.patientId = patientId;
         this.doctorId = doctorId;
         */
+        this.medicationName = medicationName;
         this.frequency = frequency;
         this.dosage = dosage;
         this.deliveryMethod = deliveryMethod;
@@ -71,6 +74,14 @@ public class Medication implements Serializable
         this.doctorId = doctorId;
     }
     */
+    public String getMedicationName() {
+        return medicationName;
+    }
+
+    public void setMedicationName(String medicationName) {
+        this.medicationName = medicationName;
+    }
+    
     public String getFrequency() {
         return frequency;
     }
