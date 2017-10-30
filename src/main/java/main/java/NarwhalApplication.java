@@ -19,7 +19,7 @@ public class NarwhalApplication {
 	    return new WebMvcConfigurerAdapter() {
 	        @Override
 	        public void addCorsMappings(CorsRegistry registry) {
-	            registry.addMapping("/Narwhal-javaconfig").allowedOrigins("http://localhost:4200");
+	            registry.addMapping("/**");
 	        }
 	    };
 	}
